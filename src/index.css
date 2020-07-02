@@ -11,3 +11,86 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.question-list{
+  list-style-type: none;
+}
+
+.question-item{ 
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.04), 0 4px 6px rgba(0, 0, 0, 0.10);
+  margin-bottom: 24px;
+}
+
+.card-header{
+  background-color: white !important;
+}
+
+.avatar{
+  background-color:#f5f5f5;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.btn-viewpoll{
+  background-color: #426BFD !important;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-decoration: none;
+  margin-top: 5%;
+}
+
+
+.nav li{
+  display: inline !important;
+  padding: 16px;
+  list-style-type: none;
+  text-decoration: none;
+ 
+}
+
+
+.nav-item{
+  color:#767676 !important;
+  text-decoration: none !important;
+}
+
+.nav-item:hover{
+  color:#000 !important;
+}
+
+.active{
+  color:#000 !important;
+  text-decoration: none !important;
+  padding-bottom: 1px;
+  border-bottom:  2px solid #426BFD;
+}
+
+/* stroke */
+nav.stroke ul li a{
+  position: relative;
+}
+nav.stroke ul li a:after,
+nav.fill ul li a:after {
+  position: absolute;
+  top:22px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background:#426BFD;
+  height: 2px;
+}
+nav.stroke ul li a:hover:after,
+nav.stroke ul li a:active
+{
+  width: 100%;
+  transition: all 0.3s;
+}
+
