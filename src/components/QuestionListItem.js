@@ -1,20 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+import { Card, Button, Badge, Col, Row, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 
 class QuestionListItem extends Component {
-    toPoll = (e) => {
-
-    }
-
     render() {
 
         const { authedUser, users, question } = this.props
         const author = question.author
+        const userName = users[author].name
         const avatarURL = users[author].avatarURL
 
         const optionOne = question.optionOne.text
@@ -22,29 +18,77 @@ class QuestionListItem extends Component {
 
         const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
         const isAnswered = allVotes.includes(authedUser) ? true : false
+
+        if (question === null && authedUser) {
+            return <p>This Tweet doesn't existd</p>
+        }
+
+
         return (
 
-            <div className="col-5">
-                <Card border='light' className="question-item">
-                    <Card.Header>
+            <div>
 
-                        <img src={avatarURL} width="35" height="35" className="avatar"></img>
-                        {author} asks
+
+                <Card border='light' className="card-item">
+                    <Card.Header>
+                        <img src={avatarURL} width="40" height="40" className="avatar"></img>
+                        <p className='body-regular'>{userName} asks</p>
                     </Card.Header>
+
                     <Card.Body>
                         <Card.Text>
-                            Would you rather <br />
-                            {optionOne} or {optionTwo} ?
+                            <div style={{ marginBottom: '16px' }}>
+                                <p className='body-regular' >
+                                    Would you rather
+                                </p>
+                            </div>
+                            <Col >
+                                <Badge variant="light">{optionOne}</Badge>
+                            </Col>
+                            <Col>
+                                <Badge variant="light">{optionTwo}</Badge>
+                            </Col>
+
                         </Card.Text>
-                        <Link to={`/polls/result/${question.id}`} 
-                              id={question.id}   
+
+                        <Link
+
+                            to={{
+                                pathname: `/questions/${question.id}`,
+                                state: {
+                                    isAnswered: isAnswered
+                                }
+                            }}
                         >
-                            <Button className='btn-viewpoll'>View Poll</Button>
+                            <Button variant='primary'>View Poll</Button>
                         </Link>
+                        {/*                             
                         {isAnswered
-                            ? <p>Answered</p>
-                            : <p>Unanswered</p>}
+                            ?
+                            <Link to={`/polls/${question.id}`}
+                                id={question.id}
+                                isAnswered = {isAnswered}
+                            >
+                                <div>
+                                    <Button variant='primary'>View Poll</Button>
+                                </div>
+                            </Link>
+                            :
+                            <Link to={`/questions/${question.id}`}
+                                id={question.id}
+                                isAnswered = {isAnswered}
+                            >
+                                <Button variant='primary'>View Poll</Button>
+                            </Link>
+
+                        } */}
+
+
                     </Card.Body>
+
+
+
+
                 </Card>
             </div>
 
@@ -59,7 +103,7 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
     return {
         authedUser,
         users,
-        question
+        question: question ? question : null
     }
 
 }

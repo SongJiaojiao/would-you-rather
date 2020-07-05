@@ -1,0 +1,29 @@
+
+
+@font-face {
+    font-family: 'font-bold';
+    src: url('font/eina-03-bold.ttf')format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'font-medium';
+    src: url('font/eina-03-semibold.ttf')format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'font-regular';
+    src: url('font/eina-03-regular.ttf')format('truetype');
+
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'nameline';
+    src: url('font/GoogleSans-Bold.ttf')format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
