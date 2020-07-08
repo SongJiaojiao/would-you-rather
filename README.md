@@ -6,11 +6,13 @@ This 'Would you rather" game goes like this: A user is asked a question in the f
 
 In this app, users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 ![](src/img/Would-you-rather.png)
+
 ## Installation
-Clone the repo: git clone https://github.com/SongJiaojiao/would-you-rather.git
-Install prohect dependencies: npm install
-Run server locally: npm start
-Navigate to http://localhost:3000 and see the app running.
+
+* Clone the repo: git clone https://github.com/SongJiaojiao/would-you-rather.git
+* Install prohect dependencies: npm install
+* Run server locally: npm start
+* Navigate to http://localhost:3000 and see the app running.
 
 ## Data
 
