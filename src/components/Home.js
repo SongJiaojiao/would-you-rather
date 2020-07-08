@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import QuestionListItem from './QuestionListItem'
 import { Tab, Nav, Row, Col, Container } from 'react-bootstrap'
 import '../index.css'
@@ -27,13 +27,12 @@ class Home extends Component {
         ).sort((a, b) => b.timestamp - a.timestamp);
 
         const unansweredQuestions = questionValues.filter(question =>
-            answeredQuestions.includes(question) == false
+            answeredQuestions.includes(question) === false
         ).sort((a, b) => b.timestamp - a.timestamp);
         return { answeredQuestions, unansweredQuestions }
     }
 
     render() {
-        console.log('this.props.location.state',this.props.location.state)
         const { authedUser, questions } = this.props
         const { answeredQuestions, unansweredQuestions } = this.separateQuestions(authedUser, questions)
         return (

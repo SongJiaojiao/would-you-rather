@@ -10,11 +10,15 @@ class PollDetail extends Component {
         selected: '',
         questionAnswered: false
     }
+
     componentDidMount() {
-        const { isAnswered } = this.props.location.state
-        this.setState({
-            questionAnswered: isAnswered
-        })
+        if (this.props.location.state) {
+            this.setState({
+                questionAnswered: this.props.location.state.isAnswered
+            })
+        }
+
+
     }
     handleChange = (e) => {
         this.setState({
@@ -24,7 +28,6 @@ class PollDetail extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        console.log('clicked')
         const { dispatch, authedUser, question } = this.props
         this.setState({
             questionAnswered: true
@@ -40,6 +43,11 @@ class PollDetail extends Component {
 
     render() {
         const { authedUser, users, question } = this.props
+        if (question == null) {
+            return <div>This poll does not exist</div>
+        }
+
+
         const author = question.author
         const userName = users[author].name
         const avatarURL = users[author].avatarURL
@@ -56,95 +64,97 @@ class PollDetail extends Component {
         const optionOnePercent = (optionOneVotes / totalCount * 100).toFixed(2)
         const optionTwoPercent = (optionTwoVotes / totalCount * 100).toFixed(2)
 
-        return (<div>
-            {this.state.questionAnswered ?
 
-                <div>
-                    <Card border='light' className="card-item">
-                        <Card.Header>
-                            <img src={avatarURL} width="40" height="40" className="avatar"></img>
-                            <p className='body-regular'>{userName} asks</p>
-                        </Card.Header>
-                        <Card.Body>
-                            <div style={{ marginBottom: '16px' }}>
-                                <p className='body-regular' >
-                                    Would you rather
+        return (
+            <div>
+                {this.state.questionAnswered ?
+
+                    <div>
+                        <Card border='light' className="card-item">
+                            <Card.Header>
+                                <img src={avatarURL} width="40" height="40" className="avatar"></img>
+                                <p className='body-regular'>{userName} asks</p>
+                            </Card.Header>
+                            <Card.Body>
+                                <div style={{ marginBottom: '16px' }}>
+                                    <p className='body-regular' >
+                                        Would you rather
                                 </p>
-                            </div>
-
-                            <Card className={optionOneClass} style={{ marginBottom: '24px' }}>
-                                {optionOneVoted ?
-                                    <Badge className='selected-badge' variant="warning">Your<br /> Vote</Badge>
-                                    :
-                                    null}
-
-                                <Card.Body>
-                                    <h3>{optionOne}</h3>
-                                    <ProgressBar now={optionOnePercent} label={`${optionOnePercent}%`} />
-                                    <p className='body-regular'>{optionOneVotes} out of {totalCount} Votes</p>
-                                </Card.Body>
-                            </Card>
-
-                            <Card className={optionTwoClass} style={{ marginBottom: '24px' }}>
-                                {optionTwoVoted ?
-                                    <Badge className='selected-badge' variant="warning">Your<br /> Vote</Badge>
-                                    :
-                                    null}
-                                <Card.Body>
-                                    <h3>{optionTwo}</h3>
-                                    <ProgressBar now={optionTwoPercent} label={`${optionTwoPercent}%`} />
-                                    <p className='body-regular'>{optionTwoVotes} out of {totalCount} Votes</p>
-                                </Card.Body>
-                            </Card>
-
-                        </Card.Body>
-                    </Card>
-                </div>
-
-                :
-                <div>
-                    <Card border='light' className='card-item'>
-                        <Card.Header>
-
-                            <img src={avatarURL} width="35" height="35" className="avatar"></img>
-                            {author} asks
-                    </Card.Header>
-                        <Card.Body>
-                            Would you rather
-                        <form onSubmit={this.handleSubmit} >
-                                <Form.Group >
-
-                                    <Form.Check
-                                        type="radio"
-                                        label={optionOne}
-                                        checked={this.state.selected === "optionOne"}
-                                        value="optionOne"
-                                        onChange={this.handleChange}
-                                    />
-                                    <Form.Check
-                                        type="radio"
-                                        label={optionTwo}
-                                        checked={this.state.selected === "optionTwo"}
-                                        value="optionTwo"
-                                        onChange={this.handleChange}
-                                    />
-
-
-                                </Form.Group>
-                                <div>
-                                    <Button type='submit'
-                                        className='button'
-                                    >
-                                        Subimt
-                                </Button>
                                 </div>
-                            </form>
-                        </Card.Body>
-                    </Card>
-                </div>
 
-            }
-        </div>
+                                <Card className={optionOneClass} style={{ marginBottom: '24px' }}>
+                                    {optionOneVoted ?
+                                        <Badge className='selected-badge' variant="warning">Your<br /> Vote</Badge>
+                                        :
+                                        null}
+
+                                    <Card.Body>
+                                        <h3>{optionOne}</h3>
+                                        <ProgressBar now={optionOnePercent} label={`${optionOnePercent}%`} />
+                                        <p className='body-regular'>{optionOneVotes} out of {totalCount} Votes</p>
+                                    </Card.Body>
+                                </Card>
+
+                                <Card className={optionTwoClass} style={{ marginBottom: '24px' }}>
+                                    {optionTwoVoted ?
+                                        <Badge className='selected-badge' variant="warning">Your<br /> Vote</Badge>
+                                        :
+                                        null}
+                                    <Card.Body>
+                                        <h3>{optionTwo}</h3>
+                                        <ProgressBar now={optionTwoPercent} label={`${optionTwoPercent}%`} />
+                                        <p className='body-regular'>{optionTwoVotes} out of {totalCount} Votes</p>
+                                    </Card.Body>
+                                </Card>
+
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                    :
+                    <div>
+                        <Card border='light' className='card-item'>
+                            <Card.Header>
+
+                                <img src={avatarURL} width="35" height="35" className="avatar"></img>
+                                {author} asks
+                    </Card.Header>
+                            <Card.Body>
+                                Would you rather
+                        <form onSubmit={this.handleSubmit} >
+                                    <Form.Group >
+
+                                        <Form.Check
+                                            type="radio"
+                                            label={optionOne}
+                                            checked={this.state.selected === "optionOne"}
+                                            value="optionOne"
+                                            onChange={this.handleChange}
+                                        />
+                                        <Form.Check
+                                            type="radio"
+                                            label={optionTwo}
+                                            checked={this.state.selected === "optionTwo"}
+                                            value="optionTwo"
+                                            onChange={this.handleChange}
+                                        />
+
+
+                                    </Form.Group>
+                                    <div>
+                                        <Button type='submit'
+                                            className='button'
+                                        >
+                                            Subimt
+                                </Button>
+                                    </div>
+                                </form>
+                            </Card.Body>
+                        </Card>
+                    </div>
+
+                }
+            </div>
 
         )
     }

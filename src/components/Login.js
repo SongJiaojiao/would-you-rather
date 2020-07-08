@@ -27,10 +27,11 @@ class Login extends Component {
         e.preventDefault()
         this.setState({
             toHome: true
-        }, () => console.log(this.history.location.state))
-
+        })
         const { dispatch } = this.props
         dispatch(setAuthedUser(this.state.user))
+        const from = this.props.location.pathname !== '/' ? this.props.location.pathname : '/home'
+        this.props.history.push(from)
 
 
     }
@@ -39,14 +40,7 @@ class Login extends Component {
     }
 
     render() {
-
-
-        const { history, users } = this.props;
-        const { from } = this.props.location.state || { from: { pathname: '/home' } }
-        if (this.state.toHome) {
-            return <Redirect to={from} />
-        }
-
+        const { users } = this.props;
         return (
             <div>
                 <Card className='card-item login-window'>
@@ -72,7 +66,6 @@ class Login extends Component {
                                             {user.name}
                                         </Dropdown.Item>
                                     ))}
-
                                 </DropdownMenu>
                             </Dropdown>
 

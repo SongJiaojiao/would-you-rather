@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Row, Col, Badge } from 'react-bootstrap'
-import {withRouter} from 'react-router-dom'
+import { Card, Row, Col} from 'react-bootstrap'
+import { withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 
@@ -25,11 +25,9 @@ class LeaderBoard extends Component {
     }
     render() {
         const { rankedUsers } = this.props
-
         return <div>
-
             {rankedUsers.map((user, index) =>
-                <div >
+                <div key = {user.id}>
                     <Card border='light' className='card-item'>
                         <Card.Body className='card-body card-body-rank'>
                             <Row style={{ margin: '0', height: '100px' }}>
@@ -61,7 +59,8 @@ class LeaderBoard extends Component {
                         </Card.Body>
 
                     </Card>
-                </div>)}
+                </div>
+            )}
         </div>
     }
 }

@@ -37,17 +37,13 @@ class NewPoll extends Component {
         this.setState({
             optionOneText: '',
             optionTwoText: '',
-
         })
-
-
 
     }
 
 
     render() {
         const { optionOneText, optionTwoText } = this.state
-        console.log('this.props.location.state',this.props.location.state)
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>

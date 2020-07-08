@@ -10,7 +10,6 @@ import LeaderBoard from './components/LeaderBoard'
 import Login from './components/Login'
 import PollDetail from './components/PollDetail'
 import PageNotFound from './components/PageNotFound'
-import ProtectedRoute from './components/ProtectedRoute'
 import './index.css'
 import './font.css'
 
@@ -40,12 +39,11 @@ class App extends Component {
             : <div className='col-6' style={{ margin: 'auto' }}>
               <Nav />
               <Switch>
-                <ProtectedRoute path='/home' component={Home} loggedIn = {loggedIn}/>
-                <ProtectedRoute exact path='/add' component={NewPoll} loggedIn = {loggedIn}/>
-                <ProtectedRoute exact path='/Leaderboard' component={LeaderBoard} loggedIn = {loggedIn}/>
-                <ProtectedRoute path='/questions/:id' component={PollDetail} loggedIn = {loggedIn}/>
+                <Route exact path='/home' component={Home} loggedIn = {loggedIn}/>
+                <Route exact path='/add' component={NewPoll} loggedIn = {loggedIn}/>
+                <Route exact path='/Leaderboard' component={LeaderBoard} loggedIn = {loggedIn}/>
+                <Route path='/questions/:id' component={PollDetail} loggedIn = {loggedIn}/>
                 <Route component={PageNotFound} />
-                <Route path='/login' component={Login} />
               </Switch>
 
 

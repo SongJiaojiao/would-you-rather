@@ -19,16 +19,9 @@ class QuestionListItem extends Component {
         const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
         const isAnswered = allVotes.includes(authedUser) ? true : false
 
-        if (question === null && authedUser) {
-            return <p>This Tweet doesn't existd</p>
-        }
-
-
         return (
 
             <div>
-
-
                 <Card border='light' className="card-item">
                     <Card.Header>
                         <img src={avatarURL} width="40" height="40" className="avatar"></img>
@@ -36,23 +29,19 @@ class QuestionListItem extends Component {
                     </Card.Header>
 
                     <Card.Body>
-                        <Card.Text>
-                            <div style={{ marginBottom: '16px' }}>
-                                <p className='body-regular' >
-                                    Would you rather
+                        <div style={{ marginBottom: '16px' }}>
+                            <p className='body-regular' >
+                                Would you rather
                                 </p>
-                            </div>
-                            <Col >
-                                <Badge variant="light">{optionOne}</Badge>
-                            </Col>
-                            <Col>
-                                <Badge variant="light">{optionTwo}</Badge>
-                            </Col>
-
-                        </Card.Text>
+                        </div>
+                        <Col >
+                            <Badge variant="light">{optionOne}</Badge>
+                        </Col>
+                        <Col>
+                            <Badge variant="light">{optionTwo}</Badge>
+                        </Col>
 
                         <Link
-
                             to={{
                                 pathname: `/questions/${question.id}`,
                                 state: {

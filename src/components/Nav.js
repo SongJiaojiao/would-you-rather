@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from "../actions/authedUser";
 import { Button, Dropdown, Row, Container, Col } from 'react-bootstrap'
@@ -7,7 +7,6 @@ import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 
 function Nav(props) {
-
     const { authedUser, users } = props
     const user = users[authedUser]
     const userName = user.name
@@ -16,8 +15,8 @@ function Nav(props) {
     function handleClick(e) {
         e.preventDefault();
         const { dispatch } = props;
-        dispatch(setAuthedUser(null));
-
+        dispatch(setAuthedUser(null))
+        props.history.push(`/`)
     }
 
     return (
@@ -82,4 +81,4 @@ function mapStateToProps({ authedUser, users }) {
     }
 
 }
-export default connect(mapStateToProps)(Nav)
+export default withRouter(connect(mapStateToProps)(Nav))
