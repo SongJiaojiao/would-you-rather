@@ -7,10 +7,10 @@ import Home from './components/Home'
 import Nav from './components/Nav'
 import NewPoll from './components/NewPoll'
 import LeaderBoard from './components/LeaderBoard'
-import PollResult from './components/PollResult'
-import PollItem from './components/PollItem'
 import Login from './components/Login'
 import PollDetail from './components/PollDetail'
+import PageNotFound from './components/PageNotFound'
+import ProtectedRoute from './components/ProtectedRoute'
 import './index.css'
 import './font.css'
 
@@ -21,7 +21,10 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
 
+
+
   render() {
+    const { loggedIn } = this.props;
 
     return (
       <Router>
@@ -29,14 +32,22 @@ class App extends Component {
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#426BFD' }} />
           {this.props.loading === true
-            ? <Login />
-            : <div className='col-6' style = {{margin:'auto'}}>
+            ? <div><Login />
+              <Switch>
+                <Route path='login' component={Login} />
+              </Switch>
+            </div>
+            : <div className='col-6' style={{ margin: 'auto' }}>
               <Nav />
-              <Route exact path='/Home' component={Home} />
-              <Route exact path='/add' component={NewPoll} />
-              <Route exact path='/Leaderboard' component={LeaderBoard} />
-              <Route path='/questions/:id' component={PollDetail} />
-              
+              <Switch>
+                <ProtectedRoute path='/home' component={Home} loggedIn = {loggedIn}/>
+                <ProtectedRoute exact path='/add' component={NewPoll} loggedIn = {loggedIn}/>
+                <ProtectedRoute exact path='/Leaderboard' component={LeaderBoard} loggedIn = {loggedIn}/>
+                <ProtectedRoute path='/questions/:id' component={PollDetail} loggedIn = {loggedIn}/>
+                <Route component={PageNotFound} />
+                <Route path='/login' component={Login} />
+              </Switch>
+
 
             </div>}
 
@@ -50,7 +61,9 @@ class App extends Component {
 
 function mapStateToProps({ authedUser }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null,
+    loggedIn: authedUser !== null
   }
 }
 export default connect(mapStateToProps)(App)
+

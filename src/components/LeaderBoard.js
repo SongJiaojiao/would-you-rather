@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Card, Row, Col, Badge } from 'react-bootstrap'
+import {withRouter} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 
@@ -81,4 +82,4 @@ function mapStateToProps({ users }) {
 
 }
 
-export default connect(mapStateToProps)(LeaderBoard)
+export default withRouter(connect(mapStateToProps)(LeaderBoard))

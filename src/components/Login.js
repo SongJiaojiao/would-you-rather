@@ -1,41 +1,56 @@
 
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom';
 import { Card, Button, Form } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownMenu from 'react-bootstrap/DropdownMenu';
-import { Link } from "react-router-dom";
+import { withRouter, Link, Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { setAuthedUser } from "../actions/authedUser";
+import { setAuthedUser, clearAuthedUser } from "../actions/authedUser";
 
 import '../index.css'
 
 
 class Login extends Component {
     state = {
-        user: 'Select User'
+        user: 'Select User',
+        toHome: false
     }
 
     handleSelect = (e) => {
         this.setState({
             user: e.target.id
-        }, () => console.log(this.state.user))
+        })
     }
+
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({
+            toHome: true
+        }, () => console.log(this.history.location.state))
+
         const { dispatch } = this.props
         dispatch(setAuthedUser(this.state.user))
-        this.props.history.push(`/Home`)
+
+
+    }
+    componentDidMount() {
+        this.props.dispatch(clearAuthedUser())
     }
 
     render() {
-        const { users } = this.props
+
+
+        const { history, users } = this.props;
+        const { from } = this.props.location.state || { from: { pathname: '/home' } }
+        if (this.state.toHome) {
+            return <Redirect to={from} />
+        }
+
         return (
             <div>
                 <Card className='card-item login-window'>
                     <Card.Header>
-
                         <h1>Welcome to Would You Rather App!</h1>
                         <p className='body-regular'>Please sign in to continue</p>
                     </Card.Header>
@@ -61,14 +76,16 @@ class Login extends Component {
                                 </DropdownMenu>
                             </Dropdown>
 
-                            <Link to="/Home">
-                                <Button variant='primary'
-                                    type='submit'
-                                    onClick={this.handleSubmit}
-                                    disabled={this.state.user === 'Select User'}>
-                                    Sign In
-                                </Button>
-                            </Link>
+
+                            <Button variant='primary'
+                                type='submit'
+                                onClick={this.handleSubmit}
+                                disabled={this.state.user === 'Select User'}>
+
+                                Sign In
+
+                            </Button>
+
 
                         </Form>
                     </Card.Body>
@@ -81,7 +98,8 @@ class Login extends Component {
 function mapStateToProps({ users }) {
 
     return {
-        users: Object.values(users)
+        users: Object.values(users),
+
     }
 
 }

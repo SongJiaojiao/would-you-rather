@@ -62,33 +62,7 @@ class QuestionListItem extends Component {
                         >
                             <Button variant='primary'>View Poll</Button>
                         </Link>
-                        {/*                             
-                        {isAnswered
-                            ?
-                            <Link to={`/polls/${question.id}`}
-                                id={question.id}
-                                isAnswered = {isAnswered}
-                            >
-                                <div>
-                                    <Button variant='primary'>View Poll</Button>
-                                </div>
-                            </Link>
-                            :
-                            <Link to={`/questions/${question.id}`}
-                                id={question.id}
-                                isAnswered = {isAnswered}
-                            >
-                                <Button variant='primary'>View Poll</Button>
-                            </Link>
-
-                        } */}
-
-
                     </Card.Body>
-
-
-
-
                 </Card>
             </div>
 
