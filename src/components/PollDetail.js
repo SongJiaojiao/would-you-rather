@@ -12,11 +12,22 @@ class PollDetail extends Component {
     }
 
     componentDidMount() {
-        if (this.props.location.state) {
+        const { authedUser, users, question } = this.props
+        if (question) {
+            const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
+            const isAnswered = allVotes.includes(authedUser) ? true : false
             this.setState({
-                questionAnswered: this.props.location.state.isAnswered
+                questionAnswered: isAnswered
             })
+
         }
+
+
+        // if (this.props.location.state) {
+        //     this.setState({
+        //         questionAnswered: this.props.location.state.isAnswered
+        //     })
+        // }
 
 
     }
@@ -53,6 +64,8 @@ class PollDetail extends Component {
         const avatarURL = users[author].avatarURL
         const optionOne = question.optionOne.text
         const optionTwo = question.optionTwo.text
+        const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
+        const isAnswered = allVotes.includes(authedUser) ? true : false
 
         const optionOneVoted = question.optionOne.votes.includes(authedUser)
         const optionTwoVoted = question.optionTwo.votes.includes(authedUser)

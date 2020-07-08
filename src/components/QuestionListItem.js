@@ -44,9 +44,7 @@ class QuestionListItem extends Component {
                         <Link
                             to={{
                                 pathname: `/questions/${question.id}`,
-                                state: {
-                                    isAnswered: isAnswered
-                                }
+                               
                             }}
                         >
                             <Button variant='primary'>View Poll</Button>
