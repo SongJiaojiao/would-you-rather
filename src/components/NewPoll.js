@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
-import { Card, Button, Form, Col, Row, Container } from 'react-bootstrap'
+import { Card, Button, Form } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 import { handleAddQuestion } from '../actions/index'
@@ -75,7 +75,7 @@ class NewPoll extends Component {
                             <div style={{ textAlign: 'center' }}>
                                 <Button type='submit'
                                     className='button'
-                                    disabled={optionOneText === '' || optionTwoText === ''}>
+                                    disabled={optionOneText === '' || optionTwoText === '' || optionOneText === optionTwoText}>
                                     Subimt
                                 </Button>
                             </div>

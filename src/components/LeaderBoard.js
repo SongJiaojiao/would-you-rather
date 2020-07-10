@@ -16,7 +16,7 @@ class LeaderBoard extends Component {
             return '#D7F2DF'
         }
         if (index === 3) {
-            return '#dedede'
+            return '#DEDEDE'
 
         }
         return '#E8ECFC'
@@ -38,7 +38,7 @@ class LeaderBoard extends Component {
                                     <h1>{index + 1}</h1>
                                 </Col>
                                 <Col md='2'>
-                                    <img style={{ marginTop: '20px' }} src={user.avatarURL} width="60" height="60" className="avatar"></img>
+                                    <img alt='avatar' style={{ marginTop: '20px' }} src={user.avatarURL} width="60" height="60" className="avatar"></img>
                                 </Col>
                                 <Col md='6' style={{ textAlign: 'left', marginTop: '24px' }}>
                                     <div style={{ verticalAlign: 'middle' }}>

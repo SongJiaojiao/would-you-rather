@@ -10,6 +10,7 @@ import LeaderBoard from './components/LeaderBoard'
 import Login from './components/Login'
 import PollDetail from './components/PollDetail'
 import PageNotFound from './components/PageNotFound'
+import ProtectedRoute from './components/ProtectedRoute'
 import './index.css'
 import './font.css'
 
@@ -30,24 +31,22 @@ class App extends Component {
 
         <Fragment>
           <LoadingBar style={{ backgroundColor: '#426BFD' }} />
-          {this.props.loading === true
-            ? <div><Login />
-              <Switch>
-                <Route path='login' component={Login} />
-              </Switch>
-            </div>
-            : <div className='col-6' style={{ margin: 'auto' }}>
+          {loggedIn ?
+            <div className='col-6' style={{ margin: 'auto' }}>
               <Nav />
               <Switch>
-                <Route exact path='/home' component={Home} loggedIn = {loggedIn}/>
-                <Route exact path='/add' component={NewPoll} loggedIn = {loggedIn}/>
-                <Route exact path='/Leaderboard' component={LeaderBoard} loggedIn = {loggedIn}/>
-                <Route path='/questions/:id' component={PollDetail} loggedIn = {loggedIn}/>
-                <Route component={PageNotFound} />
+                <ProtectedRoute exact path='/home' component={Home} loggedIn={loggedIn} />
+                <ProtectedRoute exact path='/add' component={NewPoll} loggedIn={loggedIn} />
+                <ProtectedRoute exact path='/Leaderboard' component={LeaderBoard} loggedIn={loggedIn} />
+                <ProtectedRoute path='/questions/:id' component={PollDetail} loggedIn={loggedIn} />
+                <ProtectedRoute component={PageNotFound} loggedIn={loggedIn} />
+                <Route path='/' component={Login} loggedIn={loggedIn}/>
               </Switch>
+            </div>
+            :
+            <Login />
+          }
 
-
-            </div>}
 
 
         </Fragment>

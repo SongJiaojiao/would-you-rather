@@ -1,8 +1,8 @@
 import React from 'react'
-import { NavLink, Link, withRouter } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAuthedUser } from "../actions/authedUser";
-import { Button, Dropdown, Row, Container, Col } from 'react-bootstrap'
+import { Dropdown, Row, Col } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import '../index.css'
 
@@ -26,7 +26,7 @@ function Nav(props) {
                 <nav className='nav stroke'>
                     <ul>
                         <li>
-                            <NavLink to='/Home' exact className="nav-item" activeClassName='active-nav'>
+                            <NavLink to='/home' exact className="nav-item" activeClassName='active-nav'>
                                 Home
                     </NavLink>
 
@@ -49,7 +49,7 @@ function Nav(props) {
             <Col md='auto' >
                 <Row className='signout'>
                     <Col md='auto' style={{ padding: '0' }}>
-                        <img src={avatarURL} width="45" height="45" className="avatar" style={{ display: 'inline' }} />
+                        <img alt='avatar' src={avatarURL} width="45" height="45" className="avatar" style={{ display: 'inline' }} />
                     </Col>
                     <Col md='auto' style={{ padding: '0' }}>
                         <Dropdown>

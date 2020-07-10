@@ -12,7 +12,7 @@ class PollDetail extends Component {
     }
 
     componentDidMount() {
-        const { authedUser, users, question } = this.props
+        const { authedUser, question } = this.props
         if (question) {
             const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
             const isAnswered = allVotes.includes(authedUser) ? true : false
@@ -21,14 +21,6 @@ class PollDetail extends Component {
             })
 
         }
-
-
-        // if (this.props.location.state) {
-        //     this.setState({
-        //         questionAnswered: this.props.location.state.isAnswered
-        //     })
-        // }
-
 
     }
     handleChange = (e) => {
@@ -64,8 +56,6 @@ class PollDetail extends Component {
         const avatarURL = users[author].avatarURL
         const optionOne = question.optionOne.text
         const optionTwo = question.optionTwo.text
-        const allVotes = [...question.optionOne.votes, ...question.optionTwo.votes]
-        const isAnswered = allVotes.includes(authedUser) ? true : false
 
         const optionOneVoted = question.optionOne.votes.includes(authedUser)
         const optionTwoVoted = question.optionTwo.votes.includes(authedUser)
@@ -85,7 +75,7 @@ class PollDetail extends Component {
                     <div>
                         <Card border='light' className="card-item">
                             <Card.Header>
-                                <img src={avatarURL} width="40" height="40" className="avatar"></img>
+                                <img alt='avatar' src={avatarURL} width="40" height="40" className="avatar"></img>
                                 <p className='body-regular'>{userName} asks</p>
                             </Card.Header>
                             <Card.Body>
@@ -129,7 +119,7 @@ class PollDetail extends Component {
                         <Card border='light' className='card-item'>
                             <Card.Header>
 
-                                <img src={avatarURL} width="35" height="35" className="avatar"></img>
+                                <img alt='avatar' src={avatarURL} width="35" height="35" className="avatar"></img>
                                 {author} asks
                     </Card.Header>
                             <Card.Body>

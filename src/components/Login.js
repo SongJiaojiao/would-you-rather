@@ -3,10 +3,9 @@ import React, { Component } from 'react'
 import { Card, Button, Form } from "react-bootstrap";
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownMenu from 'react-bootstrap/DropdownMenu';
-import { withRouter, Link, Redirect } from "react-router-dom";
+import { withRouter} from "react-router-dom";
 import { connect } from 'react-redux';
 import { setAuthedUser, clearAuthedUser } from "../actions/authedUser";
-
 import '../index.css'
 
 
@@ -62,7 +61,7 @@ class Login extends Component {
                                             onClick={this.handleSelect}
                                             id={user.id}
                                             className='dropdown-item'>
-                                            <img src={user.avatarURL} width="30" height="30" className="avatar"></img>
+                                            <img alt='avatar' src={user.avatarURL} width="30" height="30" className="avatar"></img>
                                             {user.name}
                                         </Dropdown.Item>
                                     ))}
